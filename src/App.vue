@@ -1,11 +1,17 @@
 <template>
-  <div>
-    <h1 class="text-blue-500">Music App</h1>
-  </div>
+  <!-- Header -->
+  <app-header></app-header>
 </template>
 
 <script>
-export default {}
+import AppHeader from './components/AppHeader.vue'
+
+export default {
+  name: 'App',
+  components: {
+    AppHeader
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>
