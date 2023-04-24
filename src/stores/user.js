@@ -7,8 +7,10 @@ export default defineStore('user', {
   }),
   actions: {
     async register(values) {
+      //signup
       const userCred = await auth.createUserWithEmailAndPassword(values.email, values.password)
 
+      // pass data to user info keeping auth id
       await usersCollection.doc(userCred.user.uid).set({
         name: values.name,
         age: values.age,
