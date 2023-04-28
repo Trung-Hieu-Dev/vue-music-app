@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import { storage } from '@/includes/firebase'
+
 export default {
   name: 'Upload',
   data() {
@@ -63,6 +65,10 @@ export default {
         if (file.type !== 'audio/mpeg') {
           return
         }
+
+        const storageRef = storage.ref() // vue-api-music-app-40ac3.appspot.com
+        const songsRef = storageRef.child(`songs/${file.name}`) // vue-api-music-app-40ac3.appspot.com/songs/music.mp3
+        songsRef.put(file)
       })
 
       console.log($event.dataTransfer)
