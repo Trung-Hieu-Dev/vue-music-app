@@ -70,9 +70,6 @@ export default {
         const songsRef = storageRef.child(`songs/${file.name}`) // vue-api-music-app-40ac3.appspot.com/songs/music.mp3
         songsRef.put(file)
       })
-
-      console.log($event.dataTransfer)
-      console.log(files)
     }
   }
 }
