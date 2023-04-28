@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { storage } from '@/includes/firebase'
+import { storage, auth, songsCollection } from '@/includes/firebase'
 
 export default {
   name: 'Upload',
@@ -63,7 +63,7 @@ export default {
 
         const storageRef = storage.ref() // vue-api-music-app-40ac3.appspot.com
         const songsRef = storageRef.child(`songs/${file.name}`) // vue-api-music-app-40ac3.appspot.com/songs/music.mp3
-        const task = songsRef.put(file) // upload file to database
+        const task = songsRef.put(file) // upload file to storage
 
         const uploadIndex =
           this.uploads.push({
@@ -89,8 +89,20 @@ export default {
             this.uploads[uploadIndex].text_class = 'text-red-400'
             console.log(error)
           },
-          () => {
+          async () => {
             // success
+            const song = {
+              uid: auth.currentUser.uid,
+              display_name: auth.currentUser.displayName,
+              original_name: task.snapshot.ref.name,
+              modified_name: task.snapshot.ref.name,
+              genre: '',
+              comment_count: 0
+            }
+
+            song.url = await task.snapshot.ref.getDownloadURL()
+            await songsCollection.add(song) // upload song to database
+
             this.uploads[uploadIndex].variant = 'bg-green-400'
             this.uploads[uploadIndex].icon = 'fas fa-check'
             this.uploads[uploadIndex].text_class = 'text-green-400'
