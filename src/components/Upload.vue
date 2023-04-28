@@ -63,7 +63,7 @@ export default {
 
         const storageRef = storage.ref() // vue-api-music-app-40ac3.appspot.com
         const songsRef = storageRef.child(`songs/${file.name}`) // vue-api-music-app-40ac3.appspot.com/songs/music.mp3
-        const task = songsRef.put(file)
+        const task = songsRef.put(file) // upload file to database
 
         const uploadIndex =
           this.uploads.push({
@@ -74,13 +74,28 @@ export default {
             icon: 'fas fa-spinner fa-spin',
             text_class: ''
           }) - 1
-        console.log(uploadIndex)
 
-        task.on('state_changed', (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          console.log(progress)
-          this.uploads[uploadIndex].current_progress = progress
-        })
+        // upload file file validation
+        task.on(
+          'state_changed',
+          (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            this.uploads[uploadIndex].current_progress = progress
+          },
+          // error
+          (error) => {
+            this.uploads[uploadIndex].variant = 'bg-red-400'
+            this.uploads[uploadIndex].icon = 'fas fa-time'
+            this.uploads[uploadIndex].text_class = 'text-red-400'
+            console.log(error)
+          },
+          () => {
+            // success
+            this.uploads[uploadIndex].variant = 'bg-green-400'
+            this.uploads[uploadIndex].icon = 'fas fa-check'
+            this.uploads[uploadIndex].text_class = 'text-green-400'
+          }
+        )
       })
     }
   }
