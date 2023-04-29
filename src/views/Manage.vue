@@ -14,7 +14,13 @@
           </div>
           <div class="p-6">
             <!-- Composition Items -->
-            <CompositionItem v-for="song in songs" :key="song.docId" :song="song" />
+            <CompositionItem
+              v-for="(song, index) in songs"
+              :key="song.docId"
+              :song="song"
+              :updateSong="updateSong"
+              :index="index"
+            />
           </div>
         </div>
       </div>
@@ -37,6 +43,12 @@ export default {
   data() {
     return {
       songs: []
+    }
+  },
+  methods: {
+    updateSong(index, values) {
+      this.songs[index].modified_name = values.modified_name
+      this.songs[index].genre = values.genre
     }
   },
   //getting songs created by user
