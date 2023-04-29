@@ -19,6 +19,7 @@
               :key="song.docId"
               :song="song"
               :updateSong="updateSong"
+              :removeSong="removeSong"
               :index="index"
             />
           </div>
@@ -49,6 +50,9 @@ export default {
     updateSong(index, values) {
       this.songs[index].modified_name = values.modified_name
       this.songs[index].genre = values.genre
+    },
+    removeSong(id) {
+      this.songs.splice(id, 1)
     }
   },
   //getting songs created by user

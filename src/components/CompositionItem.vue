@@ -2,7 +2,10 @@
   <div class="border border-gray-200 p-3 mb-4 rounded">
     <div v-show="!showForm">
       <h4 class="inline-block text-2xl font-bold">{{ song.modified_name }}</h4>
-      <button class="ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right">
+      <button
+        class="ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right"
+        @click="deleteSong"
+      >
         <i class="fa fa-times"></i>
       </button>
       <button
@@ -63,7 +66,7 @@
 
 <script>
 import { ErrorMessage } from 'vee-validate'
-import { songsCollection } from '@/includes/firebase'
+import { songsCollection, storage } from '@/includes/firebase'
 
 export default {
   name: 'CompositionItem',
@@ -79,6 +82,10 @@ export default {
     },
     index: {
       type: Number,
+      required: true
+    },
+    removeSong: {
+      type: Function,
       required: true
     }
   },
@@ -96,6 +103,7 @@ export default {
     }
   },
   methods: {
+    // edit song
     async edit(values) {
       this.in_submission = true
       this.show_alert = true
@@ -116,6 +124,17 @@ export default {
       this.in_submission = false
       this.alert_variant = 'bg-green-500'
       this.alert_message = 'Success!'
+    },
+
+    //delete song
+    async deleteSong() {
+      const storeRef = storage.ref()
+      const songRef = storeRef.child(`songs/${this.song.original_name}`)
+
+      await songRef.delete() // deleting song from storage
+      await songsCollection.doc(this.song.docId).delete() // deleting song from database
+
+      this.removeSong(this.index) // delete song from local
     }
   }
 }
