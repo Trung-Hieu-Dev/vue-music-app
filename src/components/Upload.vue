@@ -55,6 +55,7 @@ export default {
     upload($event) {
       this.is_dragover = false
 
+      //create file by drag or upload button
       const files = $event.dataTransfer ? [...$event.dataTransfer.files] : [...$event.target.files]
 
       files.forEach((file) => {
@@ -111,6 +112,12 @@ export default {
         )
       })
     }
+  },
+  // canceling upload before leaving page
+  beforeUnmount() {
+    this.uploads.forEach((upload) => {
+      upload.task.cancel()
+    })
   }
 }
 </script>
