@@ -113,7 +113,7 @@ export default {
       })
     }
   },
-  // canceling upload before leaving page
+  // canceling upload if leaving page while uploading not completed
   beforeUnmount() {
     this.uploads.forEach((upload) => {
       upload.task.cancel()
