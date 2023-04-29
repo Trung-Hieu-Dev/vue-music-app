@@ -4,7 +4,7 @@
     <div class="md:grid md:grid-cols-3 md:gap-4">
       <!-- Upload File -->
       <div class="col-span-1">
-        <AppUpload />
+        <AppUpload :addSong="addSong" />
       </div>
       <div class="col-span-2">
         <div class="bg-white rounded border border-gray-200 relative flex flex-col">
@@ -47,6 +47,13 @@ export default {
     }
   },
   methods: {
+    addSong(document) {
+      const song = {
+        ...document.data(),
+        docId: document.id
+      }
+      this.songs.push(song)
+    },
     updateSong(index, values) {
       this.songs[index].modified_name = values.modified_name
       this.songs[index].genre = values.genre
@@ -55,17 +62,11 @@ export default {
       this.songs.splice(id, 1)
     }
   },
-  //getting songs created by user
+  //getting songs list created by user from database
   async created() {
     const snapShot = await songsCollection.where('uid', '==', auth.currentUser.uid).get()
 
-    snapShot.forEach((document) => {
-      const song = {
-        ...document.data(),
-        docId: document.id
-      }
-      this.songs.push(song)
-    })
+    snapShot.forEach(this.addSong)
   }
 }
 </script>

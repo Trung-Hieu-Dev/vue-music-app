@@ -45,6 +45,12 @@ import { storage, auth, songsCollection } from '@/includes/firebase'
 
 export default {
   name: 'Upload',
+  props: {
+    addSong: {
+      type: Function,
+      required: true
+    }
+  },
   data() {
     return {
       is_dragover: false,
@@ -103,7 +109,10 @@ export default {
             }
 
             song.url = await task.snapshot.ref.getDownloadURL()
-            await songsCollection.add(song) // upload song to database
+            const songRef = await songsCollection.add(song) // upload song to database
+            const songSnaShot = await songRef.get() // convert reference to snapshot
+
+            this.addSong(songSnaShot) // add song to local
 
             this.uploads[uploadIndex].variant = 'bg-green-400'
             this.uploads[uploadIndex].icon = 'fas fa-check'
