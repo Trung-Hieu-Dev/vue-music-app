@@ -20,6 +20,7 @@
               :song="song"
               :updateSong="updateSong"
               :removeSong="removeSong"
+              :updateUnsavedFlag="updateUnsavedFlag"
               :index="index"
             />
           </div>
@@ -43,7 +44,8 @@ export default {
   },
   data() {
     return {
-      songs: []
+      songs: [],
+      unsavedFlag: false
     }
   },
   methods: {
@@ -60,6 +62,9 @@ export default {
     },
     removeSong(id) {
       this.songs.splice(id, 1)
+    },
+    updateUnsavedFlag(value) {
+      this.unsavedFlag = value
     }
   },
   //getting songs list created by user from database
@@ -67,6 +72,15 @@ export default {
     const snapShot = await songsCollection.where('uid', '==', auth.currentUser.uid).get()
 
     snapShot.forEach(this.addSong)
+  },
+  // preventing to leave edit song without saving data
+  beforeRouteLeave(to, from, next) {
+    if (!this.unsavedFlag) {
+      next()
+    } else {
+      let leave = confirm('Your changed is not complete. Are you sure to leave without saving?')
+      next(leave)
+    }
   }
 }
 </script>
