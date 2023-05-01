@@ -47,18 +47,59 @@ export default {
   components: { SongItem },
   data() {
     return {
-      songs: []
+      songs: [],
+      maxPerPage: 3,
+      pendingRequest: false
     }
   },
   async created() {
-    const snapshots = await songsCollection.get()
-    snapshots.forEach((document) => {
-      const song = {
-        docId: document.id,
-        ...document.data()
+    this.getSongs()
+    window.addEventListener('scroll', this.handleSong)
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleSong)
+  },
+  methods: {
+    async getSongs() {
+      if (this.pendingRequest) {
+        return
       }
-      this.songs.push(song)
-    })
+
+      this.pendingRequest = true
+
+      let snapshots
+
+      if (this.songs.length) {
+        const lastDoc = await songsCollection.doc(this.songs[this.songs.length - 1].docID).get()
+
+        snapshots = await songsCollection
+          .orderBy('modified_name')
+          .startAfter(lastDoc)
+          .limit(this.maxPerPage)
+          .get()
+      } else {
+        snapshots = await songsCollection.orderBy('modified_name').limit(this.maxPerPage).get()
+      }
+
+      snapshots.forEach((document) => {
+        const song = {
+          docID: document.id,
+          ...document.data()
+        }
+        this.songs.push(song)
+      })
+
+      this.pendingRequest = false
+    },
+    handleSong() {
+      const { scrollTop, offsetHeight } = document.documentElement
+      const { innerHeight } = window
+      const bottomOfWindow = Math.round(scrollTop) + innerHeight === offsetHeight
+
+      if (bottomOfWindow) {
+        this.getSongs()
+      }
+    }
   }
 }
 </script>
