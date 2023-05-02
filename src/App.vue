@@ -40,11 +40,13 @@
 </template>
 
 <script>
+import { mapWritableState } from 'pinia'
+import { auth } from './includes/firebase'
+
+import useUserStore from '@/stores/user.js'
+
 import AppHeader from './components/AppHeader.vue'
 import Auth from './components/Auth.vue'
-import { mapWritableState } from 'pinia'
-import useUserStore from '@/stores/user.js'
-import { auth } from './includes/firebase'
 
 export default {
   name: 'App',
