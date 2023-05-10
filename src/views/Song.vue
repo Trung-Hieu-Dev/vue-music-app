@@ -151,8 +151,18 @@ export default {
           ...doc.data()
         })
       })
-
-      console.log(this.comments)
+    }
+  },
+  watch: {
+    sort(newVal) {
+      if (newVal === this.$route.query.sort) {
+        return
+      }
+      this.$router.push({
+        query: {
+          sort: newVal
+        }
+      })
     }
   },
   async created() {
@@ -163,8 +173,10 @@ export default {
       return
     }
 
-    this.song = docSnapShot.data()
+    const { sort } = this.$route.query
+    this.sort = sort === '1' || sort === '2' ? sort : '1'
 
+    this.song = docSnapShot.data()
     this.getComments()
   }
 }
