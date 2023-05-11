@@ -64,6 +64,10 @@ export default defineStore('player', {
       }
     },
     updateSeek(event) {
+      if (!this.sound.playing) {
+        return
+      }
+
       // define distance progress bar to the Viewport and get progress bar width
       const { x, width } = event.currentTarget.getBoundingClientRect()
 
