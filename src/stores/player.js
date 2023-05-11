@@ -64,12 +64,18 @@ export default defineStore('player', {
       }
     },
     updateSeek(event) {
+      // define distance progress bar to the Viewport and get progress bar width
       const { x, width } = event.currentTarget.getBoundingClientRect()
+
+      // define and correct the right position of mouse click
       const clickX = event.clientX - x
+
+      // define time to start playing song
       const percentage = clickX / width
       const seconds = this.sound.duration() * percentage
-
       this.sound.seek(seconds)
+
+      // Listen for the seek event to dynamically update the progress bar
       this.sound.once('seek', this.progress)
     }
   },
