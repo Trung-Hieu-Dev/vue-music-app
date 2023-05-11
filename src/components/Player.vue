@@ -47,9 +47,6 @@ export default {
   },
   computed: {
     ...mapState(usePlayerStorage, ['playing', 'seek', 'duration', 'playerProgress', 'current_song'])
-  },
-  mounted() {
-    console.log(this.playing)
   }
 }
 </script>

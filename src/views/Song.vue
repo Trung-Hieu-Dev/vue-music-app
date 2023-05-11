@@ -194,9 +194,6 @@ export default {
 
     this.song = docSnapShot.data()
     this.getComments()
-  },
-  mounted() {
-    console.log(this.playing)
   }
 }
 </script>
