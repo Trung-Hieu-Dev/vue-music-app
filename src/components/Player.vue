@@ -16,7 +16,7 @@
       <!-- Current Position -->
       <div class="player-currenttime">{{ seek }}</div>
       <!-- Scrub Container  -->
-      <div class="w-full h-2 rounded bg-gray-200 relative cursor-pointer">
+      <div class="w-full h-2 rounded bg-gray-200 relative cursor-pointer" @click="updateSeek">
         <!-- Player Ball -->
         <span
           class="absolute -top-2.5 -ml-2.5 text-gray-800 text-lg"
@@ -43,13 +43,10 @@ import usePlayerStorage from '@/stores/player'
 export default {
   name: 'Player',
   methods: {
-    ...mapActions(usePlayerStorage, ['toggleAudio'])
+    ...mapActions(usePlayerStorage, ['toggleAudio', 'updateSeek'])
   },
   computed: {
     ...mapState(usePlayerStorage, ['playing', 'seek', 'duration', 'playerProgress', 'current_song'])
-  },
-  mounted() {
-    console.log(this.current_song)
   }
 }
 </script>
