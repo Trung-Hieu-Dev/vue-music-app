@@ -1,0 +1,48 @@
+{
+  "home": {
+    "listen": "Nghe Nhạc Hay!",
+    "card_title": "Danh Sách"
+  },
+  "header": {
+    "about": "Giới Thiệu",
+    "login": "Đăng Nhập",
+    "register": "Đăng Ký",
+    "manage": "Quản Lý",
+    "logout": "Đăng Xuất"
+  },
+  "song": {
+    "comment_count": "{count} bình luận"
+  },
+  "register": {
+    "accept": "Tôi đồng ý với {0}",
+    "tos": "Điều khoản dịch vụ của Music"
+  },
+  "manage": {
+    "card_title": "Danh Sách"
+  },
+  "upload": {
+    "card_title": "Tải Nhạc Lên",
+    "content": "Thả file tại đây"
+  },
+  "auth": {
+    "title": "Tài Khoản"
+  },
+  "form": {
+    "login": "Đăng Nhập",
+    "register": "Đăng Ký",
+    "submit_login": "Đăng Nhập",
+    "submit_register": "Tạo Tài Khoản",
+    "password": "Mật Khẩu",
+    "confirm_password": "Xác Nhận Mật Khẩu",
+    "name": "Tên",
+    "age": "Tuổi",
+    "country": "Quốc Gia",
+    "email": "Email"
+  },
+  "countries": {
+    "no1": "Mỹ",
+    "no2": "Mê Xi Cô",
+    "no3": "Đức",
+    "no4": "Ca Na Đa"
+  }
+}

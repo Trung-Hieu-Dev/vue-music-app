@@ -13,20 +13,34 @@
         <!-- Primary Navigation -->
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
-          <router-link class="px-2 text-white" :to="{ name: 'about' }">About</router-link>
+          <router-link class="px-2 text-white" :to="{ name: 'about' }">
+            {{ $t('header.about') }}
+          </router-link>
           <li v-if="!userStore.userLoggedIn">
             <a class="px-2 text-white" href="#" @click.prevent="toggleAuthModal"
-              >Login / Register</a
+              >{{ $t('header.login') }} / {{ $t('header.register') }}</a
             >
           </li>
           <template v-else>
             <li>
-              <router-link class="px-2 text-white" :to="{ name: 'manage' }">Manage</router-link>
+              <router-link class="px-2 text-white" :to="{ name: 'manage' }">
+                {{ $t('header.manage') }}
+              </router-link>
             </li>
             <li>
-              <a class="px-2 text-white" href="#" @click="signOut">Logout</a>
+              <a class="px-2 text-white" href="#" @click="signOut">
+                {{ $t('header.logout') }}
+              </a>
             </li>
           </template>
+        </ul>
+        <!-- Translation -->
+        <ul class="ml-auto">
+          <li>
+            <a href="#" class="px-2 text-white" @click="changeLocale">
+              {{ currentLocale }}
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -41,7 +55,10 @@ import useUserStore from '@/stores/user'
 export default {
   name: 'AppHeader',
   computed: {
-    ...mapStores(useModalStore, useUserStore)
+    ...mapStores(useModalStore, useUserStore),
+    currentLocale() {
+      return this.$i18n.locale === 'en' ? 'English' : 'Vietnamese'
+    }
   },
   methods: {
     toggleAuthModal() {
@@ -52,6 +69,9 @@ export default {
       if (this.$route.meta.requiresAuth) {
         this.$router.push({ name: 'home' })
       }
+    },
+    changeLocale() {
+      this.$i18n.locale = this.$i18n.locale === 'en' ? 'vi' : 'en'
     }
   }
 }

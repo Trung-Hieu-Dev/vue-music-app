@@ -9,7 +9,7 @@
   <vee-form :validation-schema="schema" @submit="register" :initial-values="userData">
     <!-- Name -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Name</label>
+      <label class="inline-block mb-2">{{ $t('form.name') }}</label>
       <vee-field
         name="name"
         type="text"
@@ -20,7 +20,7 @@
     </div>
     <!-- Email -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Email</label>
+      <label class="inline-block mb-2">{{ $t('form.email') }}</label>
       <vee-field
         name="email"
         type="email"
@@ -31,7 +31,7 @@
     </div>
     <!-- Age -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Age</label>
+      <label class="inline-block mb-2">{{ $t('form.age') }}</label>
       <vee-field
         name="age"
         type="number"
@@ -41,7 +41,7 @@
     </div>
     <!-- Password -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Password</label>
+      <label class="inline-block mb-2">{{ $t('form.password') }}</label>
       <vee-field :bails="false" v-slot="{ field, errors }" name="password">
         <input
           v-bind="field"
@@ -56,7 +56,7 @@
     </div>
     <!-- Confirm Password -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Confirm Password</label>
+      <label class="inline-block mb-2">{{ $t('form.confirm_password') }}</label>
       <vee-field
         name="confirm_password"
         type="password"
@@ -67,16 +67,16 @@
     </div>
     <!-- Country -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Country</label>
+      <label class="inline-block mb-2">{{ $t('form.country') }}</label>
       <vee-field
         as="select"
         name="country"
         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
       >
-        <option value="USA">USA</option>
-        <option value="Mexico">Mexico</option>
-        <option value="Germany">Germany</option>
-        <option value="Canada">Canada</option>
+        <option value="USA">{{ $t('countries.no1') }}</option>
+        <option value="Mexico">{{ $t('countries.no2') }}</option>
+        <option value="Germany">{{ $t('countries.no3') }}</option>
+        <option value="Canada">{{ $t('countries.no4') }}</option>
       </vee-field>
       <ErrorMessage class="text-red-600" name="country" />
     </div>
@@ -88,7 +88,9 @@
         type="checkbox"
         class="w-4 h-4 float-left -ml-6 mt-1 rounded"
       />
-      <label class="inline-block">Accept terms of service</label>
+      <i18n-t class="inline-block" keypath="register.accept" tag="label">
+        <a href="">{{ $t('register.tos') }}</a>
+      </i18n-t>
       <ErrorMessage class="text-red-600 block" name="tos" />
     </div>
     <button
@@ -96,7 +98,7 @@
       class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
       :disabled="reg_in_submission"
     >
-      Submit
+      {{ $t('form.submit_register') }}
     </button>
   </vee-form>
 </template>

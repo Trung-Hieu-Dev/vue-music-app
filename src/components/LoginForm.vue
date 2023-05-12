@@ -20,7 +20,7 @@
     </div>
     <!-- Password -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Password</label>
+      <label class="inline-block mb-2">{{ $t('form.password') }}</label>
       <vee-field
         name="password"
         type="password"
@@ -34,7 +34,7 @@
       type="submit"
       class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
     >
-      Submit
+      {{ $t('form.submit_login') }}
     </button>
   </vee-form>
 </template>
@@ -81,5 +81,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped></style>
