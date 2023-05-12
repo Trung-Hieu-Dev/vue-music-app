@@ -93,13 +93,9 @@
       </i18n-t>
       <ErrorMessage class="text-red-600 block" name="tos" />
     </div>
-    <button
-      type="submit"
-      class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
-      :disabled="reg_in_submission"
-    >
+    <base-button type="submit" :disabled="reg_in_submission">
       {{ $t('form.submit_register') }}
-    </button>
+    </base-button>
   </vee-form>
 </template>
 

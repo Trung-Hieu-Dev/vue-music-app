@@ -29,13 +29,9 @@
       />
       <ErrorMessage name="password" class="text-red-600" />
     </div>
-    <button
-      :disabled="login_in_submission"
-      type="submit"
-      class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
-    >
+    <base-button :disabled="login_in_submission" type="submit">
       {{ $t('form.submit_login') }}
-    </button>
+    </base-button>
   </vee-form>
 </template>
 

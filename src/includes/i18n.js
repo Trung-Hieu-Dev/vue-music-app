@@ -5,6 +5,7 @@ import vi from '@/locales/vi.json'
 export default createI18n({
   locale: 'en', // set locale
   fallbackLocale: 'en', // set fallback locale
+  defaultScope: 'global',
   messages: {
     en,
     vi
