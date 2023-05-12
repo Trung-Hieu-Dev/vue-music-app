@@ -69,6 +69,20 @@ export default {
           return
         }
 
+        // accept user do uploading if offline but only alert that upload error
+        if (!navigator.onLine) {
+          this.uploads.push({
+            task: {},
+            current_progress: 100,
+            name: file.name,
+            variant: 'bg-red-400',
+            icon: 'fas fa-times',
+            text_class: 'text-red-400'
+          })
+
+          return
+        }
+
         const storageRef = storage.ref() // vue-api-music-app-40ac3.appspot.com
         const songsRef = storageRef.child(`songs/${file.name}`) // vue-api-music-app-40ac3.appspot.com/songs/music.mp3
         const task = songsRef.put(file) // upload file to storage
