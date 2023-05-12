@@ -11,7 +11,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
-        enabled: true
+        enabled: true,
+        type: 'module'
       },
       manifest: {
         name: 'Music App',
@@ -23,6 +24,9 @@ export default defineConfig({
             type: 'image/png'
           }
         ]
+      },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,png,jpg,}']
       }
     })
   ],
