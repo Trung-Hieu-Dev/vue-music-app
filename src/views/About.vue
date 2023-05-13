@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>About Page</h1>
-    <base-button />
+    <p>On Progress. Will be Update Soon!</p>
   </div>
 </template>
 
