@@ -3,18 +3,23 @@ import { createPinia } from 'pinia'
 import { registerSW } from 'virtual:pwa-register'
 
 import router from '@/router'
-import i18n from '@/includes/i18n'
-import VeeValidatePlugin from '@/includes/validation'
-import { auth } from '@/includes/firebase'
 import Icon from '@/directives/icon'
+
+import VeeValidatePlugin from '@/includes/validation'
+import i18n from '@/includes/i18n'
+import { auth } from '@/includes/firebase'
 import GlobalComponents from '@/includes/_globals'
+import progressBar from '@/includes/progress-bar'
 
 import App from '@/App.vue'
 
 import '@/assets/base.css'
 import '@/assets/main.css'
+import 'nprogress/nprogress.css'
 
 registerSW({ immediate: true })
+
+progressBar(router)
 
 let app
 
