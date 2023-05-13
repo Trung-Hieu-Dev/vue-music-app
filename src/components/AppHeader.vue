@@ -13,9 +13,9 @@
         <!-- Primary Navigation -->
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
-          <router-link class="px-2 text-white" :to="{ name: 'about' }">
+          <!-- <router-link class="px-2 text-white" :to="{ name: 'about' }">
             {{ $t('header.about') }}
-          </router-link>
+          </router-link> -->
           <li v-if="!userStore.userLoggedIn">
             <a class="px-2 text-white" href="#" @click.prevent="toggleAuthModal"
               >{{ $t('header.login') }} / {{ $t('header.register') }}</a
