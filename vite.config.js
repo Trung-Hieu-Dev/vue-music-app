@@ -28,7 +28,9 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,png,jpg,}']
-      }
+      },
+      strategies: 'generateSW',
+      injectRegister: 'auto'
     })
     // visualizer({ open: true })
   ],
