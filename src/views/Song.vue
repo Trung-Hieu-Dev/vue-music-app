@@ -134,7 +134,7 @@ export default {
 
       const comment = {
         content: values.comment,
-        datePosted: new Date().toString(),
+        datePosted: new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' }),
         sid: this.$route.params.id,
         name: auth.currentUser.displayName,
         uid: auth.currentUser.uid
